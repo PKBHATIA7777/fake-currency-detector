@@ -4,3 +4,4 @@ numpy
 Pillow
 gdown
 
+tensorflow==2.18.1
