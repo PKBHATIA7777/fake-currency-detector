@@ -1,1 +1,6 @@
+Flask
+tensorflow
+numpy
+Pillow
 gdown
+
