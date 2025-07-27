@@ -3,17 +3,24 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
+import gdown
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
+# Download model from Google Drive if not already present
+MODEL_PATH = "currency_model.h5"
+DRIVE_FILE_ID = "1J73rEsSU1q2D1NUi3O3pWgYG5EFb_yso"
+
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Google Drive...")
+    gdown.download(f"https://drive.google.com/uc?id={DRIVE_FILE_ID}", MODEL_PATH, quiet=False)
+
 # Load your model
-model = tf.keras.models.load_model("currency_model.h5")
+model = tf.keras.models.load_model(MODEL_PATH)
 
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# Ensure the upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def model_predict(img_path):
@@ -44,3 +51,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

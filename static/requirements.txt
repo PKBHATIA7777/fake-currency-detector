@@ -2,3 +2,5 @@ Flask
 tensorflow
 numpy
 Pillow
+gdownecho "gdown" >> requirements.txt
+
